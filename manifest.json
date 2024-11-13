@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "LLM Raw Chat Extension",
+    "version": "1.0",
+    "description": "Intercepts and displays raw LLM responses",
+    "permissions": [
+        "webRequest",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://*.anthropic.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
