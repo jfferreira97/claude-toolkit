@@ -8,7 +8,7 @@
         "storage"
     ],
     "host_permissions": [
-        "https://*.anthropic.com/*"
+        "https://*.claude.ai/*"
     ],
     "background": {
         "service_worker": "background.js"
