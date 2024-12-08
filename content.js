@@ -8,6 +8,8 @@ const SLIDER_SELECTOR = '.inline-flex.gap-0.flex-row-reverse.overflow-hidden';
  * Disconnects observer afterwards, to prevent side effects as the target element changes
  */
 function observeAttachmentsSlider() {
+    let recognition = null;
+
     console.log("[Claude toolkit] observing for attachments slider");
     const observer = new MutationObserver(async () => {
         // Injects microphone button into Claude's UI, appending to the attachments slider button in the input textbox
@@ -27,10 +29,54 @@ function observeAttachmentsSlider() {
                 const buttonContainer = document.createElement('div');
                 buttonContainer.innerHTML = buttonHtml;
                 const button = sliderDiv.appendChild(buttonContainer.firstElementChild);
-                const indicator = button.querySelector('#recording-indicator');
-                
+
+
                 button.querySelector('button').addEventListener('click', () => {
-                    indicator.style.display = indicator.style.display === 'none' ? 'block' : 'none';
+                    const indicator = button.querySelector('#recording-indicator');
+                    const isRecording = indicator.style.display === 'none';
+
+                    // Voice is being recorded if the indicator is being displayed
+                    indicator.style.display = isRecording ? 'block' : 'none';
+
+                    if (isRecording) {
+                        recognition = new webkitSpeechRecognition();
+                        recognition.continuous = true;
+                        recognition.interimResults = false;
+
+                        recognition.onresult = (event) => {
+                            const transcript = Array.from(event.results).map(result => result[0].transcript).join('');
+                            console.log('[Claude toolkit] Speech to text transcript:', transcript);
+
+                            const proseMirror = document.querySelector('div[contenteditable="true"].ProseMirror');
+                            const emptyP = proseMirror.querySelector('p.is-empty');
+
+                            // If Claude's chatbox is empty, the transcript must be added to emptyP to prevent an empty paragraph
+                            if (emptyP) {
+                                emptyP.textContent = transcript;
+                            } else {
+                                const p = document.createElement('p');
+                                p.textContent = transcript;
+                                proseMirror.appendChild(p);
+                            }
+
+                            // Remove indicator and stop recording
+                            indicator.style.display = 'none';
+                            recognition.stop();
+                            recognition = null;
+                        };
+
+                        recognition.onerror = (event) => {
+                            console.error('[Claude toolkit] Speech recognition error:', event.error);
+                            indicator.style.display = 'none';
+                        };
+
+                        recognition.start();
+                    } else {
+                        if (recognition) {
+                            recognition.stop();
+                            recognition = null;
+                        }
+                    }
                 });
             } catch (error) {
                 console.error('[Claude toolkit] Error:', error);
