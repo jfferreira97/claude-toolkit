@@ -2,4 +2,6 @@
 A Chrome extension that enhances your Claude chat experience with additional utilities and features.
 
 ## Features
-- [Coming Soon] **Raw Text Copy**: Extracts clean text from server-sent events, bypassing markdown formatting for raw string copying and pasting (in case you want to use the markdown yourself)
+- **Speech-to-Text**: Adds a microphone button to Claude's interface (attachments slider in the chatbox), enabling voice input using the Web Speech API. Click the mic to start/stop recording.
+
+![image](https://github.com/user-attachments/assets/c61240c6-7dd4-4379-8974-58a03fc8291a)
