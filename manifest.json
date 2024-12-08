@@ -13,8 +13,16 @@
     "background": {
         "service_worker": "background.js"
     },
+    "content_scripts": [{
+        "matches": ["https://*.claude.ai/*"],
+        "js": ["content.js"]
+    }],
     "action": {
         "default_popup": "popup.html"
     },
-    "devtools_page": "devtools/devtools.html"
+    "devtools_page": "devtools/devtools.html",
+    "web_accessible_resources": [{
+        "resources": ["assets/*"],
+        "matches": ["https://*.claude.ai/*"]
+    }]
 }
