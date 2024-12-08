@@ -1,2 +1,5 @@
-# llm-raw-chat-extension
-Chrome extension that provides direct access to raw, unformatted responses from LLM chat interfaces (Claude, ChatGPT). Extracts clean text from server-sent events, bypassing UI formatting for raw string copying and pasting.
+# Claude Toolkit
+A Chrome extension that enhances your Claude chat experience with additional utilities and features.
+
+## Features
+- [Coming Soon] **Raw Text Copy**: Extracts clean text from server-sent events, bypassing markdown formatting for raw string copying and pasting (in case you want to use the markdown yourself)
