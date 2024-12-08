@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "LLM Raw Chat Extension",
+    "name": "Claude toolkit",
     "version": "1.0",
-    "description": "Intercepts and displays raw LLM responses",
+    "description": "Provides various QOL changes to boost productivity with Anthropic's Claude",
     "permissions": [
         "webRequest",
         "storage"
