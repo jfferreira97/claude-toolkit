@@ -1,3 +1,4 @@
+(function() {
 // Will print upon extension loading on browser (anywhere)
 console.log("[Claude toolkit] background.js working");
 
@@ -12,4 +13,4 @@ console.log("[Claude toolkit] background.js working");
 //     { urls: ["https://*.claude.ai/api/*/chat_conversations/*/completion"] },
 //     ["requestBody"]
 // );
-
+})();
